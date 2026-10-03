@@ -14,6 +14,6 @@ Lo que aprendí por el camino vale más que el resultado. Comparar las mismas ci
 
 El proyecto recorre el ciclo completo: SQL, limpieza y análisis en Python, segmentación RFM y K-means, modelo de clasificación, cuadro de mando en Power BI e informe ejecutivo.
 
-Código, cuadro de mando e informe: [enlace al repositorio]
+Código, cuadro de mando e informe: https://github.com/MiguelUFV/olist-analisis-clientes
 
 #AnálisisDeDatos #PowerBI #Python #SQL

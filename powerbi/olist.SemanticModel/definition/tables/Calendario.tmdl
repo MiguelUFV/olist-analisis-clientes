@@ -1,0 +1,42 @@
+table Calendario
+	lineageTag: 431f6a5c-6849-5fec-8678-e6dd366ee829
+
+	column Fecha
+		dataType: dateTime
+		formatString: dd/MM/yyyy
+		lineageTag: d0a40e04-c0ee-5746-b3fd-4850137a2b27
+		summarizeBy: none
+		sourceColumn: Fecha
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column Mes
+		dataType: dateTime
+		formatString: MMM yyyy
+		lineageTag: 7911cb26-fc2d-5a64-9724-440e411f6ec8
+		summarizeBy: none
+		sourceColumn: Mes
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column Año
+		dataType: int64
+		formatString: 0
+		lineageTag: d433c0f9-0229-51c5-a08b-f1fa9c7458fd
+		summarizeBy: none
+		sourceColumn: Año
+
+	partition Calendario = m
+		mode: import
+		source =
+				let
+				    Fechas = List.Dates(#date(2017, 1, 1), 608, #duration(1, 0, 0, 0)),
+				    Tabla = Table.FromList(Fechas, Splitter.SplitByNothing(), {"Fecha"}),
+				    Tipos = Table.TransformColumnTypes(Tabla, {{"Fecha", type date}}),
+				    Mes = Table.AddColumn(Tipos, "Mes", each Date.StartOfMonth([Fecha]), type date),
+				    Anio = Table.AddColumn(Mes, "Año", each Date.Year([Fecha]), Int64.Type)
+				in
+				    Anio
+
+	annotation PBI_ResultType = Table
+

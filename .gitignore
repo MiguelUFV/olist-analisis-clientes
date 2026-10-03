@@ -1,0 +1,11 @@
+# Datos: pesan demasiado para GitHub y se regeneran con scripts/00_cargar_datos.py
+data/raw/
+data/*.db
+.ipynb_checkpoints/
+__pycache__/
+data/clean/
+# Power BI: caché local y configuración de esta máquina
+**/.pbi/
+.mcp.json
+# Archivos temporales de Office
+~$*

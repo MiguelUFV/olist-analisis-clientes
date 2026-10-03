@@ -1,0 +1,21 @@
+model Model
+	culture: es-ES
+	defaultPowerBIDataSourceVersion: powerBI_V3
+	sourceQueryCulture: es-ES
+	dataAccessOptions
+		legacyRedirects
+		returnErrorValuesAsNull
+
+annotation __PBI_TimeIntelligenceEnabled = 0
+
+annotation PBI_QueryOrder = ["RutaDatos","Pedidos","Clientes","Items","Calendario"]
+
+annotation PBI_ProTooling = ["DevMode"]
+
+ref table Pedidos
+ref table Clientes
+ref table Items
+ref table Calendario
+
+ref cultureInfo es-ES
+

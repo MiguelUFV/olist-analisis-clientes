@@ -1,0 +1,12 @@
+relationship 6b8ff381-3790-5654-a8fa-5a870ab083e0
+	fromColumn: Pedidos.customer_unique_id
+	toColumn: Clientes.customer_unique_id
+
+relationship d3102499-3aac-528c-b91f-f28e1ca5285a
+	fromColumn: Pedidos.fecha_compra
+	toColumn: Calendario.Fecha
+
+relationship d830cd53-a016-5f33-9022-d31db2573783
+	fromColumn: Items.order_id
+	toColumn: Pedidos.order_id
+

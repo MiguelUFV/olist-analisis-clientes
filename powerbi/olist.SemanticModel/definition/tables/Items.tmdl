@@ -1,0 +1,52 @@
+table Items
+	lineageTag: cc1ca624-301a-557a-b672-98e6ca8644cb
+
+	measure 'Ingresos de producto' = SUM(Items[price])
+		formatString: #,0
+		lineageTag: e77e95c0-7e34-5fd7-88bc-e5909f5ab91d
+
+	measure 'Unidades vendidas' = COUNTROWS(Items)
+		formatString: #,0
+		lineageTag: 983ffc82-5301-5bde-a50f-6024572a5db3
+
+	measure 'Precio medio' = AVERAGE(Items[price])
+		formatString: #,0.00
+		lineageTag: 933c10b9-3443-5582-8cf1-c673ba03df64
+
+	column order_id
+		dataType: string
+		lineageTag: 7609e4da-b748-512d-934c-6047e6eafc9d
+		summarizeBy: none
+		sourceColumn: order_id
+
+	column categoria
+		dataType: string
+		lineageTag: ae634e7b-d08c-51ac-8fe6-ebff5cf65d04
+		summarizeBy: none
+		sourceColumn: categoria
+
+	column price
+		dataType: double
+		lineageTag: 7b532584-1b35-55f4-a3a5-59b3478e31f8
+		summarizeBy: none
+		sourceColumn: price
+
+	column freight_value
+		dataType: double
+		lineageTag: 387f30c0-0223-58d2-a18c-fa66c1cbf1d0
+		summarizeBy: none
+		sourceColumn: freight_value
+
+	partition Items = m
+		mode: import
+		source =
+				let
+				    Origen = Csv.Document(File.Contents(RutaDatos & "items.csv"), [Delimiter=",", Encoding=65001, QuoteStyle=QuoteStyle.Csv]),
+				    Encabezados = Table.PromoteHeaders(Origen, [PromoteAllScalars=true]),
+				    Columnas = Table.SelectColumns(Encabezados, {"order_id", "categoria", "price", "freight_value"}),
+				    Tipos = Table.TransformColumnTypes(Columnas, {{"price", type number}, {"freight_value", type number}}, "en-US")
+				in
+				    Tipos
+
+	annotation PBI_ResultType = Table
+

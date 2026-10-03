@@ -1,0 +1,93 @@
+table Clientes
+	lineageTag: 24ac288b-8bfe-556b-bd54-82b50e592125
+
+	measure 'Nº clientes' = COUNTROWS(Clientes)
+		formatString: #,0
+		lineageTag: dda76b4b-49c1-5c8d-929f-1bdd3cd073b6
+
+	measure '% de clientes' = DIVIDE([Nº clientes], CALCULATE([Nº clientes], ALL(Clientes)))
+		formatString: 0.0%
+		lineageTag: 780a70d9-8e00-5d10-8ae9-6590923e7e08
+
+	measure 'Gasto de clientes' = SUM(Clientes[gasto])
+		formatString: #,0
+		lineageTag: d8887db2-d5d3-556a-bbe1-1ead4f2a2305
+
+	measure '% de ingresos' = DIVIDE([Gasto de clientes], CALCULATE([Gasto de clientes], ALL(Clientes)))
+		formatString: 0.0%
+		lineageTag: fb4cdef5-88f1-57bf-b8b9-56ffdbb1f104
+
+	measure 'Gasto medio por cliente' = AVERAGE(Clientes[gasto])
+		formatString: #,0.00
+		lineageTag: 2ce74ae6-c569-556e-8477-e9dc7ca679d4
+
+	measure 'Recencia media (días)' = AVERAGE(Clientes[recencia])
+		formatString: #,0
+		lineageTag: aa956405-d002-5337-8cf3-6acaafa733ac
+
+	measure 'Nota media del cliente' = AVERAGE(Clientes[nota_media])
+		formatString: 0.00
+		lineageTag: 5a8721aa-67ee-564e-9180-3eee7c3c0797
+
+	column customer_unique_id
+		dataType: string
+		lineageTag: 7f11bdd2-d0f7-571c-a376-de2dc37dafea
+		summarizeBy: none
+		sourceColumn: customer_unique_id
+
+	column estado
+		dataType: string
+		lineageTag: 531918db-212d-59d9-8a93-8350f753a17c
+		summarizeBy: none
+		sourceColumn: estado
+
+	column recencia
+		dataType: double
+		lineageTag: d3cabb9d-436e-5341-bc21-0f72ab398ada
+		summarizeBy: none
+		sourceColumn: recencia
+
+	column frecuencia
+		dataType: double
+		lineageTag: 90f3036b-ea35-51e6-a1d4-641d16c0d6e7
+		summarizeBy: none
+		sourceColumn: frecuencia
+
+	column gasto
+		dataType: double
+		lineageTag: 1675315e-c04a-5676-ad7e-b2740956e477
+		summarizeBy: none
+		sourceColumn: gasto
+
+	column nota_media
+		dataType: double
+		lineageTag: ddedaf24-bffe-5aaa-a2f1-e27fcbb7a645
+		summarizeBy: none
+		sourceColumn: nota_media
+
+	column segmento
+		dataType: string
+		lineageTag: f682fe07-f77d-5d33-a032-347da72ddbb9
+		summarizeBy: none
+		sourceColumn: segmento
+
+	column cluster
+		dataType: string
+		lineageTag: 969bdcd8-17a9-5e9e-9fe8-50f330d80d43
+		summarizeBy: none
+		sourceColumn: cluster
+
+	partition Clientes = m
+		mode: import
+		source =
+				let
+				    Origen = Csv.Document(File.Contents(RutaDatos & "clientes.csv"), [Delimiter=",", Encoding=65001, QuoteStyle=QuoteStyle.Csv]),
+				    Encabezados = Table.PromoteHeaders(Origen, [PromoteAllScalars=true]),
+				    Columnas = Table.SelectColumns(Encabezados, {"customer_unique_id", "estado", "recencia", "frecuencia", "gasto", "nota_media", "segmento", "cluster"}),
+				    Tipos = Table.TransformColumnTypes(Columnas, {{"recencia", type number}, {"frecuencia", type number}, {"gasto", type number}, {"nota_media", type number}}, "en-US"),
+				    Final = Table.ReplaceValue(Tipos, "", "Sin valoración", Replacer.ReplaceValue, {"cluster"})
+				in
+				    Final
+
+	annotation PBI_ResultType = Table
+

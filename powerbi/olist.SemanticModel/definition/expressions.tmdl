@@ -1,0 +1,5 @@
+expression RutaDatos = "C:\Users\migue\Documents\analisi de datos\data\clean\" meta [IsParameterQuery=true, Type="Text", IsParameterQueryRequired=true]
+	lineageTag: 7993ed97-05af-5cd9-bc40-aef4c9635182
+
+	annotation PBI_ResultType = Text
+

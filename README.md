@@ -4,7 +4,7 @@ Análisis de la cartera de clientes de Olist, un marketplace brasileño, sobre 9
 
 Proyecto personal de portfolio con el [conjunto de datos público de Olist](https://www.kaggle.com/datasets/olistbr/brazilian-ecommerce). No es un encargo de la compañía.
 
-![Cuadro de mando: resumen de ventas](informe/capturas/dashboard_1_resumen.png)
+![Resumen del proyecto](informe/figuras/1_resumen_proyecto.png)
 
 ## La pregunta
 
@@ -37,7 +37,31 @@ Las conclusiones y las cinco recomendaciones están en el [informe ejecutivo (PD
 | 6. Cuadro de mando | [dashboard_olist.pbix](dashboard_olist.pbix) | Power BI: 4 páginas interactivas, 21 medidas DAX |
 | 7. Informe | [informe/informe_ejecutivo_olist.pdf](informe/informe_ejecutivo_olist.pdf) | Conclusiones y recomendaciones para dirección |
 
-El cuadro de mando también está como proyecto de texto en [powerbi/](powerbi/) (formato PBIP), generado con [scripts/06_generar_powerbi.py](scripts/06_generar_powerbi.py).
+El cuadro de mando también está como proyecto de texto en [powerbi/](powerbi/) (formato PBIP), generado con [scripts/06_generar_powerbi.py](scripts/06_generar_powerbi.py). Las figuras de esta página se generan con [scripts/07_figuras_portfolio.py](scripts/07_figuras_portfolio.py) a partir de los datos.
+
+## Galería
+
+### Cuadro de mando en Power BI
+
+| Resumen de ventas | Experiencia del cliente |
+|---|---|
+| ![Resumen de ventas](informe/capturas/dashboard_1_resumen.png) | ![Experiencia del cliente](informe/capturas/dashboard_2_experiencia.png) |
+
+| Segmentación de clientes | Detalle por estado y categoría |
+|---|---|
+| ![Segmentación de clientes](informe/capturas/dashboard_3_clientes.png) | ![Detalle por estado y categoría](informe/capturas/dashboard_4_detalle.png) |
+
+Las cuatro páginas comparten filtros de año, estado y categoría, y cada gráfico filtra al resto al hacer clic.
+
+### SQL
+
+![Consulta SQL con CTE y función ventana, y su resultado](informe/figuras/2_sql_retraso_valoracion.png)
+
+### Python
+
+![Retención por cohortes](informe/figuras/3_python_cohortes_retencion.png)
+
+![Curva ROC y curva de ganancia del modelo](informe/figuras/4_python_modelo_predictivo.png)
 
 ## Decisiones de método
 

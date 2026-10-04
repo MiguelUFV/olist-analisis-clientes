@@ -23,7 +23,7 @@ Claude hace cada fase paso a paso y abre los archivos en VS Code. Miguel revisa 
 | 4 | Segmentación (RFM, cohortes, K-means) | pandas, sklearn | `notebooks/04_segmentacion.ipynb`, `data/clean/clientes.csv` | Hecho |
 | 5 | Predicción de mala valoración (1-2 estrellas) | sklearn | `notebooks/05_modelo.ipynb` | Hecho |
 | 6 | Dashboard | Power BI | `scripts/06_generar_powerbi.py`, `powerbi/olist.pbip`, `dashboard_olist.pbix` | Hecho |
-| 7 | Informe ejecutivo, README y post | Word, GitHub | `informe/informe_ejecutivo_olist.docx`, `README.md`, `informe/post_linkedin.md` | Hecho |
+| 7 | Informe ejecutivo, README y post | Word, GitHub | `informe/informe_ejecutivo_olist.docx`, `README.md`, `informe/post_linkedin.md`, `scripts/07_figuras_portfolio.py`, `informe/figuras/` | Hecho |
 
 ## Decisiones
 - **SQLite** y no PostgreSQL: sin servidor que instalar; el SQL que se usa es el mismo.
